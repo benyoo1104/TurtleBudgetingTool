@@ -20,16 +20,16 @@
         android:id="@+id/totalBudgetTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Total Budget: $0"
-        android:textSize="25sp"
-        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="#000"
-        android:layout_marginTop="5dp" />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -41,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:fabSize="normal"
+            android:layout_margin="16dp"
             android:backgroundTint="#000"
             android:src="@drawable/turtle"
-            android:layout_margin="16dp" />
+            app:fabSize="normal" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

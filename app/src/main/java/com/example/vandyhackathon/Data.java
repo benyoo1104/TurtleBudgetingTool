@@ -4,7 +4,9 @@ public class Data {
     String item, date, id, note;
     int amount, month;
 
-    public Data() {}
+    public Data() {
+    }
+
     public Data(String item, String date, String id, String note, int amount, int month) {
         this.item = item;
         this.date = date;

@@ -42,8 +42,7 @@ public class SpendingsAdapter extends RecyclerView.Adapter<SpendingsAdapter.View
         holder.date.setText("On " + data.getDate());
         holder.note.setText("Note: " + data.getNote());
         Log.w("debug", data.toString());
-        switch (data.getItem())
-        {
+        switch (data.getItem()) {
             case "Charity":
                 holder.imageView.setImageResource(R.drawable.turtle);
                 break;
@@ -79,8 +78,7 @@ public class SpendingsAdapter extends RecyclerView.Adapter<SpendingsAdapter.View
         return myDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView item, amount, date, note;
         public ImageView imageView;
 

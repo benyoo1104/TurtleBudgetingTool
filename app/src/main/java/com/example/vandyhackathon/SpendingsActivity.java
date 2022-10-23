@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -63,7 +64,6 @@ public class SpendingsActivity extends AppCompatActivity {
     private String item = "";
     private String note = "";
     private int amount = 0;
-
 
 
     @Override
@@ -112,17 +112,15 @@ public class SpendingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 myDataList.clear();
-                for (DataSnapshot dataSnapshot: snapshot.getChildren())
-                {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Data data = snapshot.getValue(Data.class);
                     myDataList.add(data);
                 }
                 spendingsAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
                 int totalAmount = 0;
-                for (DataSnapshot dss: snapshot.getChildren())
-                {
-                    Map<String, Object> map = (Map<String, Object>)dss.getValue();
+                for (DataSnapshot dss : snapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String, Object>) dss.getValue();
                     Object total = map.get("amount");
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalAmount += pTotal;
@@ -149,8 +147,7 @@ public class SpendingsActivity extends AppCompatActivity {
                 holder.setItemAmount("Amount: $" + model.getAmount());
                 holder.setItemDate("On: " + model.getDate());
                 holder.setItemNote("Note: " + model.getNote());
-                switch (model.getItem())
-                {
+                switch (model.getItem()) {
                     case "Charity":
                         holder.imageView.setImageResource(R.drawable.turtle);
                         break;
@@ -201,49 +198,46 @@ public class SpendingsActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
-        synchronized (adapter)
-        {
+        synchronized (adapter) {
             adapter.notify();
         }
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         View mView;
         public ImageView imageView;
         public TextView note, date;
-        public MyViewHolder(@NonNull View itemView)
-        {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             imageView = itemView.findViewById(R.id.imageView);
             note = itemView.findViewById(R.id.note);
             date = itemView.findViewById(R.id.date);
         }
-        public void setItemName(String itemName)
-        {
+
+        public void setItemName(String itemName) {
             TextView item = mView.findViewById(R.id.item);
             item.setText(itemName);
         }
-        public void setItemAmount(String itemAmount)
-        {
+
+        public void setItemAmount(String itemAmount) {
             TextView amount = mView.findViewById(R.id.amount);
             amount.setText(itemAmount);
         }
-        public void setItemDate(String itemDate)
-        {
+
+        public void setItemDate(String itemDate) {
             TextView date = mView.findViewById(R.id.date);
             date.setText(itemDate);
         }
-        public void setItemNote(String itemNote)
-        {
+
+        public void setItemNote(String itemNote) {
             TextView note = mView.findViewById(R.id.note);
             note.setText(itemNote);
         }
     }
 
-    private void addItemSpentOn()
-    {
+    private void addItemSpentOn() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View myView = inflater.inflate(R.layout.input_layout, null);
@@ -262,20 +256,13 @@ public class SpendingsActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(amount.getText().toString()))
-                {
+                if (TextUtils.isEmpty(amount.getText().toString())) {
                     amount.setError("Missing Amount");
-                }
-                else if (itemSpinner.getSelectedItem().toString().equals("Select a category"))
-                {
+                } else if (itemSpinner.getSelectedItem().toString().equals("Select a category")) {
                     Toast.makeText(SpendingsActivity.this, "Select a category", Toast.LENGTH_SHORT).show();
-                }
-                else if (TextUtils.isEmpty(note.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(note.getText().toString())) {
                     note.setError("Missing Note");
-                }
-                else
-                {
+                } else {
                     loader.setMessage("Adding a budget item");
                     loader.setCanceledOnTouchOutside(false);
                     loader.show();
@@ -291,12 +278,9 @@ public class SpendingsActivity extends AppCompatActivity {
                     expensesRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(SpendingsActivity.this, "Budget Item added Successfully", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(SpendingsActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                             loader.dismiss();
@@ -316,8 +300,7 @@ public class SpendingsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void updateData()
-    {
+    private void updateData() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View mView = inflater.inflate(R.layout.update_layout, null);
@@ -347,12 +330,9 @@ public class SpendingsActivity extends AppCompatActivity {
                 expensesRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             Toast.makeText(SpendingsActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(SpendingsActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -366,12 +346,9 @@ public class SpendingsActivity extends AppCompatActivity {
                 expensesRef.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             Toast.makeText(SpendingsActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(SpendingsActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }

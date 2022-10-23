@@ -42,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
         signupQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,47 +50,31 @@ public class SignupActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(email.getText().toString()))
-                {
+                if (TextUtils.isEmpty(email.getText().toString())) {
                     email.setError("Missing Email");
-                }
-                else if (TextUtils.isEmpty(password.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(password.getText().toString())) {
                     password.setError("Missing Password");
-                }
-                else if (TextUtils.isEmpty(emailVerification.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(emailVerification.getText().toString())) {
                     emailVerification.setError("Missing Email Verification");
-                }
-                else if (TextUtils.isEmpty(passwordVerification.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(passwordVerification.getText().toString())) {
                     passwordVerification.setError("Missing Password Verification");
-                }
-                else if (!email.getText().toString().equals(emailVerification.getText().toString()))
-                {
+                } else if (!email.getText().toString().equals(emailVerification.getText().toString())) {
                     Toast.makeText(SignupActivity.this, "Email does not match", Toast.LENGTH_SHORT).show();
-                }
-                else if (!password.getText().toString().equals(passwordVerification.getText().toString()))
-                {
+                } else if (!password.getText().toString().equals(passwordVerification.getText().toString())) {
                     Toast.makeText(SignupActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     progressDialog.setMessage("Creating Account...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
                     mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                                 progressDialog.dismiss();
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(SignupActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }

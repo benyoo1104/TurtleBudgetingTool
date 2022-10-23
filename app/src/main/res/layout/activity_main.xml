@@ -20,60 +20,65 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:layout_below="@+id/toolbar" >
+        android:layout_below="@+id/toolbar"
+        android:paddingHorizontal="10dp">
+
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="left"
+                android:padding="5dp"
                 android:text="Current Budget:"
                 android:textColor="#000"
-                android:gravity="left"
-                android:textStyle="bold"
-                android:padding="5dp"
-                android:textSize="16sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </TableRow>
+
         <TableRow>
+
             <TextView
                 android:id="@+id/budgetTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="$0"
                 android:textColor="#000"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:padding="5dp"
-                android:textSize="24sp" />
+                android:textSize="34sp"
+                android:textStyle="bold" />
         </TableRow>
     </TableLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/table" >
+        android:layout_below="@+id/table">
+
         <GridLayout
             android:id="@+id/gridLayout"
-            android:rowCount="2"
-            android:columnCount="2"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff">
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#fff"
+            android:columnCount="2"
+            android:rowCount="2">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/budgetCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="fill"
                 android:layout_rowWeight="1"
+                android:layout_column="0"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:background="#fff"
                 app:cardBackgroundColor="@color/material_dynamic_primary90">
@@ -81,34 +86,35 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
-                    android:layout_gravity="center_vertical|center_horizontal" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/fish" />
-                    
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Monthly Budget"
-                        android:textStyle="bold"
+                        android:textAlignment="center"
                         android:textColor="#000"
-                        android:textAlignment="center" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/recurringPaymentCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
-                android:layout_column="0"
-                android:layout_gravity="fill"
                 android:layout_rowWeight="1"
+                android:layout_column="0"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:background="#fff"
                 app:cardBackgroundColor="@color/material_dynamic_primary90">
@@ -116,9 +122,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
-                    android:layout_gravity="center_vertical|center_horizontal" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
@@ -129,21 +135,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bills and Subscriptions"
-                        android:textStyle="bold"
+                        android:textAlignment="center"
                         android:textColor="#000"
-                        android:textAlignment="center" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/monthCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity="fill"
                 android:layout_rowWeight="1"
+                android:layout_column="1"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:background="#fff"
                 app:cardBackgroundColor="@color/material_dynamic_primary90">
@@ -151,9 +158,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
-                    android:layout_gravity="center_vertical|center_horizontal" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
@@ -164,21 +171,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Spendings This Month"
-                        android:textStyle="bold"
+                        android:textAlignment="center"
                         android:textColor="#000"
-                        android:textAlignment="center" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/analyticsCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
-                android:layout_column="1"
-                android:layout_gravity="fill"
                 android:layout_rowWeight="1"
+                android:layout_column="1"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:background="#fff"
                 app:cardBackgroundColor="@color/material_dynamic_primary90">
@@ -186,9 +194,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
-                    android:layout_gravity="center_vertical|center_horizontal" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
@@ -199,9 +207,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Analytics"
-                        android:textStyle="bold"
+                        android:textAlignment="center"
                         android:textColor="#000"
-                        android:textAlignment="center" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -212,9 +220,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:fabSize="normal"
+            android:layout_margin="16dp"
             android:backgroundTint="#000"
             android:src="@drawable/turtle"
-            android:layout_margin="16dp" />
+            app:fabSize="normal" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -79,8 +79,7 @@ public class BudgetActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int totalBudget = 0;
-                for (DataSnapshot snap: snapshot.getChildren())
-                {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     totalBudget += data.getAmount();
                     String strTotal = String.valueOf("Monthly Budget: $" + totalBudget);
@@ -102,8 +101,7 @@ public class BudgetActivity extends AppCompatActivity {
         });
     }
 
-    private void addItem()
-    {
+    private void addItem() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View myView = inflater.inflate(R.layout.input_layout, null);
@@ -119,16 +117,11 @@ public class BudgetActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(amount.getText().toString()))
-                {
+                if (TextUtils.isEmpty(amount.getText().toString())) {
                     amount.setError("Missing Amount");
-                }
-                else if (itemSpinner.getSelectedItem().toString().equals("Select a category"))
-                {
+                } else if (itemSpinner.getSelectedItem().toString().equals("Select a category")) {
                     Toast.makeText(BudgetActivity.this, "Select a category", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     loader.setMessage("Adding a budget item");
                     loader.setCanceledOnTouchOutside(false);
                     loader.show();
@@ -144,12 +137,9 @@ public class BudgetActivity extends AppCompatActivity {
                     budgetRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(BudgetActivity.this, "Budget Item added Successfully", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                             loader.dismiss();
@@ -181,8 +171,7 @@ public class BudgetActivity extends AppCompatActivity {
                 holder.setItemAmount("Amount: $" + model.getAmount());
                 holder.setItemDate("On: " + model.getDate());
                 holder.note.setVisibility(View.GONE);
-                switch (model.getItem())
-                {
+                switch (model.getItem()) {
                     case "Charity":
                         holder.imageView.setImageResource(R.drawable.turtle);
                         break;
@@ -232,44 +221,41 @@ public class BudgetActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
-        synchronized (adapter)
-        {
+        synchronized (adapter) {
             adapter.notify();
         }
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         View mView;
         public ImageView imageView;
         public TextView note, date;
-        public MyViewHolder(@NonNull View itemView)
-        {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             imageView = itemView.findViewById(R.id.imageView);
             note = itemView.findViewById(R.id.note);
             date = itemView.findViewById(R.id.date);
         }
-        public void setItemName(String itemName)
-        {
+
+        public void setItemName(String itemName) {
             TextView item = mView.findViewById(R.id.item);
             item.setText(itemName);
         }
-        public void setItemAmount(String itemAmount)
-        {
+
+        public void setItemAmount(String itemAmount) {
             TextView amount = mView.findViewById(R.id.amount);
             amount.setText(itemAmount);
         }
-        public void setItemDate(String itemDate)
-        {
+
+        public void setItemDate(String itemDate) {
             TextView date = mView.findViewById(R.id.date);
             date.setText(itemDate);
         }
     }
 
-    private void updateData()
-    {
+    private void updateData() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View mView = inflater.inflate(R.layout.update_layout, null);
@@ -299,12 +285,9 @@ public class BudgetActivity extends AppCompatActivity {
                 budgetRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             Toast.makeText(BudgetActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -318,12 +301,9 @@ public class BudgetActivity extends AppCompatActivity {
                 budgetRef.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             Toast.makeText(BudgetActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
