@@ -7,7 +7,11 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView budgetCardView, monthCardView, analyticsCardView, recurringPaymentCardView;
     private Toolbar toolbar;
     private TextView budgetTextView;
+    private Button refreshBtn;
     private FirebaseAuth mAuth;
     private DatabaseReference budgetRef, expensesRef;
     private String uid = "";
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         monthCardView = findViewById(R.id.monthCardView);
         analyticsCardView = findViewById(R.id.analyticsCardView);
         recurringPaymentCardView = findViewById(R.id.recurringPaymentCardView);
+        refreshBtn = findViewById(R.id.refreshBtn);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Turtle Budgeting Tool");
@@ -89,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         budgetRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -120,5 +134,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.account) {
+            Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
