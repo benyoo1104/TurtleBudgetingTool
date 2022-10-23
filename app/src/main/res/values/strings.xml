@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Vandy Hackathon</string>
+    <string name="hyperlink">Please Visit <a href="https://kobeguo99.github.io/CommOCEAN/">CommOCEAN</a></string>
 
     <string-array name="items">
         <item>Select a category</item>
