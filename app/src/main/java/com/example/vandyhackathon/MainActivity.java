@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView budgetCardView, monthCardView, analyticsCardView;
+    private CardView budgetCardView, monthCardView, analyticsCardView, recurringPaymentCardView;
     private Toolbar toolbar;
     private TextView budgetTextView;
     private FirebaseAuth mAuth;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         budgetCardView = findViewById(R.id.budgetCardView);
         monthCardView = findViewById(R.id.monthCardView);
         analyticsCardView = findViewById(R.id.analyticsCardView);
+        recurringPaymentCardView = findViewById(R.id.recurringPaymentCardView);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Turtle Budgeting Tool");
@@ -72,11 +73,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        recurringPaymentCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BillActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        analyticsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AnalyticsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         budgetRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap: snapshot.getChildren())
-                {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     currentBudget += data.getAmount();
                 }
@@ -92,8 +108,7 @@ public class MainActivity extends AppCompatActivity {
         expensesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap: snapshot.getChildren())
-                {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     currentBudget -= data.getAmount();
                 }
