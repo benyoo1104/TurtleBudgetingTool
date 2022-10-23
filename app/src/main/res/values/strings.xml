@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Vandy Hackathon</string>
+
+    <string-array name="items">
+        <item>Select a category</item>
+        <item>Charity</item>
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Health</item>
+        <item>Home</item>
+        <item>Personal</item>
+        <item>Transportation</item>
+        <item>Other</item>
+    </string-array>
+</resources>
